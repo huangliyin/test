@@ -1,0 +1,50 @@
+<extend name="AdminPublic/public" />
+<block name="linkedit">
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span>友情链接修改</span>
+     </div>
+     <div class="mws-panel-body no-padding">
+	<form class="mws-form" action="__MODULE__/Link/update" method="post" enctype="multipart/form-data">
+		
+        
+		<div class="mws-form-inline">
+			<div class="mws-form-row">
+				<label class="mws-form-label">网站名称</label>
+				<div class="mws-form-item">
+					<input class="large" type="text" name="name" value="{$info['name']}">
+				</div>
+			</div>
+               <div class="mws-form-row">
+                    <label class="mws-form-label">网站地址</label>
+                    <div class="mws-form-item">
+                         <input class="large" type="text" name="url" value="{$info['url']}">
+                    </div>
+               </div>
+
+			   <div class="mws-form-row">
+                    <label class="mws-form-label">图片</label>
+                    <div class="mws-form-item">
+                         <img src="__PUBLIC__/{$info['pic']}" width="100px" height="100px" >
+                    </div>
+               </div>
+               <div class="mws-form-row">
+                    <label class="mws-form-label">图片</label>
+                    <div class="mws-form-item">
+			           
+						文件上传:<input type="file" name="pic" value="">
+                    </div>
+               </div>
+			
+			
+		<div class="mws-button-row">
+			
+			<input type="hidden" value="{$info['id']}" name="id">
+			<input  class="btn btn-danger" type="submit" value="提交">
+			<input class="btn " type="reset" value="重置">
+		</div>
+	</form>
+</div>    	
+</div>
+</block>
+<block name="title">友情链接修改</block>

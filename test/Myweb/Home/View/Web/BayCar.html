@@ -1,0 +1,159 @@
+<extend name="Web/public" />
+<block name="bycar">
+<div class="i_bg">  
+    <div class="content mar_20">
+    	<img src="__PUBLIC__/h/images/img1.jpg" />        
+    </div>
+    
+    <!--Begin 第一步：查看购物车 Begin -->
+    <div class="content mar_20">
+    	<table border="0" class="car_tab" id="cars" style="width:1200px; margin-bottom:50px;" cellspacing="0" cellpadding="0">
+          <tr>
+
+            <td class="car_th" width="490">商品名称</td>
+            <td class="car_th" width="140">属性</td>
+            <td class="car_th" width="140">型号</td>
+            <td class="car_th" width="150">购买数量</td>
+            <td class="car_th" width="130">小计</td>
+            
+            <td class="car_th" width="150">操作</td>
+          </tr>
+          <if condition="!empty(session('rr'))">
+          <foreach name="nn1" item="row">
+          <tr> 
+
+            <td>
+              <input type="checkbox" value="{$row['id']}">
+            	<div class="c_s_img"><img src="__PUBLIC__/{$row['pic']}" width="73" height="73" /></div>
+                {$row['name']}
+            </td>
+            <td align="center">颜色:{$row['color']}</td>
+             <td align="center">{$row['type']}</td>
+            <td align="center">
+            	<div class="c_num">
+                    <a href="/jian?id={{$value['id']}}"><input type="button" value="" onclick="jianUpdate1(jq(this));" class="car_btn_1" /></a>
+                	<input type="text" value="{$row['num']}" name="" class="car_ipt" />  
+                    <a href="/jia?id={{$value['id']}}"><input type="button" value="" onclick="addUpdate1(jq(this));" class="car_btn_2" /></a>
+                </div>
+            </td>
+            <td align="center" style="color:#ff4e00;">￥{$row['xiaoji']}</td>
+           
+            <td align="center"><a href="__MODULE__/Web/bydelete?id={$row['id']}" >删除</a>&nbsp; &nbsp;<a href="#">加入收藏</a></td>
+          </tr>
+          </foreach>
+        </if>
+          <tr height="70">
+          	<td colspan="6" style="font-family:'Microsoft YaHei'; border-bottom:0;">
+              <a href="javascript:void(0)" class="alldel">全选</a> <a href="javascript:void(0)" class="nodel">全不选</a> <a href="javascript:void(0)" class="fdel">反选</a></br>
+              <a href="javascript:void(0)" class="dodel">删除</a>
+            	<!-- <label class="r_rad"><input type="checkbox" name="clear" checked="checked" /></label><label class="r_txt">清空购物车</label> -->
+                <span class="fr">商品总价：<b style="font-size:22px; color:#ff4e00;">￥{$_SESSION['aa']}</b></span>
+            </td>
+          </tr>
+          <tr valign="top" height="150">
+          	<td colspan="6" align="right">
+               
+            	<a href="__MODULE__/Web/index"><img src="__PUBLIC__/h/images/buy1.gif" /></a>&nbsp; &nbsp; <a href="__MODULE__/Web/dizhi"><img src="__PUBLIC__/h/images/buy2.gif" /></a>
+            </td>
+          </tr> 
+        </table>
+    </div>
+    <script type="text/javascript">
+ // alert($);
+//全选
+$(".alldel").click(function(){
+    // alert('sss');
+  $("#cars").find('tr').each(function(){
+    // alert($(this));
+    // alert($(this).find(":checkbox").val());
+     $(this).find(":checkbox").attr('checked',true);
+  })
+})
+
+//全不选
+ $(".nodel").click(function(){
+  $("#cars").find('tr').each(function(){
+    $(this).find(':checkbox').attr('checked',false);
+  })
+ })
+
+//反选
+$(".fdel").click(function(){
+  $("#cars").find('tr').each(function(){
+    if($(this).find(":checkbox").attr('checked')){
+      $(this).find(":checkbox").attr('checked',false);
+    }else{
+      $(this).find(":checkbox").attr('checked',true);
+    }
+  })
+})
+
+//获取删除 绑定单击事件
+$(".dodel").click(function(){
+  a=[];//存储选中数据的id值
+  //获取选中数据的id
+  $(":checkbox").each(function(){
+    //判断是否被选中
+    if($(this).attr('checked')){
+      //获取id
+      id=$(this).val();
+      // alert(id);
+      a.push(id);
+    }
+  })
+// alert(a);
+
+//Ajax $.get()
+ s=confirm('你确定删除吗?');
+  if(s){
+     $.get('/dodels',{uname:a},function(data){
+      alert(data);
+    if(data==1){
+      // alert('删除成功');
+      //删除html样式
+      for(var i=0;i<a.length;i++){
+        //获取被选中的input
+
+        $("input[value="+a[i]+"]").parents('tr').remove();
+      }
+
+    }
+  });
+  }
+
+})
+ </script>
+	<!--End 第一步：查看购物车 End--> 
+    
+    
+    <!--Begin 弹出层-删除商品 Begin-->
+    <div id="fade" class="black_overlay"></div>
+    <div id="MyDiv" class="white_content">             
+        <div class="white_d">
+            <div class="notice_t">
+                <span class="fr" style="margin-top:10px; cursor:pointer;" onclick="CloseDiv('MyDiv','fade')"><img src="__PUBLIC__/images/close.gif" /></span>
+            </div>
+            <div class="notice_c">
+           		
+                <table border="0" align="center" style="font-size:16px;" cellspacing="0" cellpadding="0">
+                  <tr valign="top">
+                    <td>您确定要把该商品移除购物车吗？</td>
+                  </tr>
+                  <tr height="50" valign="bottom">
+                    <td><a href="" class="b_sure">确定</a><a href="#" class="b_buy">取消</a></td>
+                  </tr>
+                </table>
+                    
+            </div>
+        </div>
+    </div>    
+    <!--End 弹出层-删除商品 End-->
+    
+    
+    <!--Begin Footer Begin -->
+   
+    
+    <!--End Footer End -->    
+</div>
+</block>
+<block name="title">购物车</block>

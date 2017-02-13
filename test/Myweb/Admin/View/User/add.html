@@ -1,0 +1,70 @@
+<extend name="AdminPublic:public"/>
+<block name="useradd">
+<html>
+ <head></head>
+ <body>
+  <div class="mws-panel grid_8"> 
+   <div class="mws-panel-header"> 
+    <span>用户添加</span> 
+   </div> 
+   <div class="mws-panel-body no-padding"> 
+    <form class="mws-form" action="__MODULE__/User/userinsert" method="post"> 
+   
+     <div class="mws-form-inline"> 
+      <div class="mws-form-row"> 
+       <label class="mws-form-label">用户名</label> 
+       <div class="mws-form-item"> 
+        <input class="small" type="text" name="username" value=""/> 
+       </div> 
+      </div> 
+      <div class="mws-form-row"> 
+       <label class="mws-form-label">密码</label> 
+       <div class="mws-form-item"> 
+        <input class="small" type="password" name="password" /> 
+       </div> 
+      </div> 
+      <div class="mws-form-row"> 
+       <label class="mws-form-label">确认密码</label> 
+       <div class="mws-form-item"> 
+        <input class="small" type="password" name="qrpassword" /> 
+       </div> 
+      </div> 
+      <div class="mws-form-row"> 
+       <label class="mws-form-label">年龄</label> 
+       <div class="mws-form-item"> 
+        <input class="small" type="text" name="age" value=""/> 
+       </div> 
+      </div>
+      <div class="mws-form-row"> 
+       <label class="mws-form-label">性别</label> 
+       <div class="mws-form-item"> 
+         <td><input type="radio" name="sex" value="1"/>男 
+          <input type="radio" name="sex" value="2"/>女</td>
+       </div> 
+      </div>
+      <div class="mws-form-row"> 
+       <label class="mws-form-label">电话</label> 
+       <div class="mws-form-item"> 
+        <input class="small" type="text" name="phone" value=""/> 
+       </div> 
+      </div>
+      <div class="mws-form-row"> 
+       <label class="mws-form-label">邮箱</label> 
+       <div class="mws-form-item"> 
+        <input class="small" type="text" name="email" value=""/> 
+       </div> 
+      </div> 
+       
+     </div> 
+     <div class="mws-button-row"> 
+          
+      <input value="提交" class="btn btn-danger" type="submit" /> 
+      <input value="重置" class="btn " type="reset" /> 
+     </div> 
+    </form> 
+   </div> 
+  </div>
+ </body>
+</html>
+</block>
+<block name="title">后台用户添加</block>
